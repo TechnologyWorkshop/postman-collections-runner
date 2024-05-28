@@ -1,4 +1,4 @@
-name: Run RDW Tests 
+name: Run RDW Tests
 
 on:
   push:
