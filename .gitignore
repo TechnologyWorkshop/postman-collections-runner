@@ -1,0 +1,5 @@
+*.sqlite
+*.vsidx
+*.wsuo
+DocumentLayout.json
+VSWorkspaceState.json
