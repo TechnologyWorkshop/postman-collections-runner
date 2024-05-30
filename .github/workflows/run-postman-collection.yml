@@ -1,4 +1,4 @@
-name: Run RDW Tests
+name: Run Postman Collection
 
 on:
   push:
@@ -7,52 +7,20 @@ on:
   pull_request:
 
 jobs:
-  run-and-deploy:
+  run-postman-collection:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-        # Check out the code from the repository.
+        uses: actions/checkout@v2 
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '22'
-        # Set up Node.js version 22.
 
-      - name: Install Newman and HTML Reporter
-        run: npm install -g newman newman-reporter-html
-        # Install Newman and the HTML reporter globally.
+      - name: Install Newman
+        run: npm install -g newman
 
-      - name: Run Postman Collection and generate HTML report
-        id: run_postman
-        run: |
-          mkdir -p rdw-test-results
-          TIMESTAMP=$(date +"%Y%m%d%H%M%S")
-          REPORT_PATH="rdw-test-results/${TIMESTAMP}_report.html"  # Dynamically generate the path for the HTML report using a timestamp.
-          newman run tests/rdw-test-collection.postman_collection.json -r html --reporter-html-export "${REPORT_PATH}"
-          echo "::set-output name=report_path::${REPORT_PATH}"  # Save the path to the HTML report as an output variable.
-        # Run the Postman collection with Newman and generate an HTML report. Save the report path to an output variable.
-
-      - name: Fetch all branches
-        run: git fetch --all
-        # Fetch all branches from the remote repository.
-
-      - name: Switch to test-results branch
-        run: git checkout test-results
-        # Switch to the test-results branch.
-
-      - name: Configure Git
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-        # Configure Git with a user email and name.
-
-      - name: Push HTML report to test-results branch
-        run: |
-          REPORT_PATH="${{ steps.run_postman.outputs.report_path }}"  # Retrieve the path to the HTML report from the output variable.
-          git add "${REPORT_PATH}"  # Add the HTML report to the Git staging area.
-          git commit -m "Add Newman HTML report"  # Commit the HTML report.
-          git push origin test-results  # Push the commit to the test-results branch.
-        # Add, commit, and push the HTML report to the test-results branch.
+      - name: Run Postman Collection
+        run: newman run tests/rdw-test-collection.postman_collection.json
