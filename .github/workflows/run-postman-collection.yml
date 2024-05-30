@@ -18,8 +18,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
-        # Set up Node.js version 16.
+          node-version: '21'
+        # Set up Node.js version 21.
 
       - name: Install Newman and HTML Reporter
         run: npm install -g newman newman-reporter-html
