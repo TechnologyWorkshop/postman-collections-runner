@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8ccade3d-6b7b-47d5-abd7-d1eb57c50c09",
+		"_postman_id": "16cc38fe-10df-4ee5-b24c-d6b2fc5f8787",
 		"name": "rdw-test-collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "35195121"
@@ -26,7 +26,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=1XJG18",
+					"raw": "https://opendata.rdw.nl/resource/m9d7-ebf2.json?merk=BMW",
 					"protocol": "https",
 					"host": [
 						"opendata",
@@ -39,8 +39,8 @@
 					],
 					"query": [
 						{
-							"key": "kenteken",
-							"value": "1XJG18"
+							"key": "merk",
+							"value": "BMW"
 						}
 					]
 				}
