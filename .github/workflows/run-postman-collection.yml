@@ -22,7 +22,7 @@ jobs:
         # Set up Node.js version 21.
 
       - name: Install Newman and HTML Reporter
-        run: npm install -g newman newman-reporter-html
+        run: npm install -g newman newman-reporter-html punycode
         # Install Newman and the HTML reporter globally.
 
       - name: Run Postman Collection and generate HTML report
