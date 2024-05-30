@@ -33,7 +33,6 @@ jobs:
           REPORT_PATH="rdw-test-results/${TIMESTAMP}_report.html"  # Dynamically generate the path for the HTML report using a timestamp.
           newman run tests/rdw-test-collection.postman_collection.json -r html --reporter-html-export "${REPORT_PATH}"
           echo "::set-output name=report_path::${REPORT_PATH}"  # Save the path to the HTML report as an output variable.
-        continue-on-error: true
         # Run the Postman collection with Newman and generate an HTML report. Save the report path to an output variable.
 
       - name: Fetch all branches
