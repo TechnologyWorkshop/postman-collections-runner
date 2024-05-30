@@ -13,8 +13,19 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							"// Controleer of de status code 200 is\r",
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Controleer of het veld \"merk\" in alle objecten \"BMW\" is\r",
+							"pm.test(\"All vehicles are BMW\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"\r",
+							"    // Itereer door elk object in de response array\r",
+							"    jsonData.forEach(function(vehicle) {\r",
+							"        pm.expect(vehicle.merk).to.eql(\"BMW\");\r",
+							"    });\r",
 							"});"
 						],
 						"type": "text/javascript",
