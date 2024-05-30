@@ -30,7 +30,7 @@ jobs:
           mkdir -p rdw-test-results
           TIMESTAMP=$(date +"%Y%m%d%H%M%S")
           REPORT_PATH="rdw-test-results/${TIMESTAMP}_report.html"
-          npm exec punycode newman run tests/rdw-test-collection.postman_collection.json -r html --reporter-html-export "${REPORT_PATH}"
+          $(npm root -g punycode)/bin/punycode newman run tests/rdw-test-collection.postman_collection.json -r html --reporter-html-export "${REPORT_PATH}"
           echo "::set-output name=report_path::${REPORT_PATH}"
         # Run the Postman collection with Newman and generate an HTML report. Save the report path to an output variable.
 
