@@ -22,17 +22,16 @@ jobs:
         # Set up Node.js version 21.
 
       - name: Install Newman and HTML Reporter
-        run: npm install -g newman newman-reporter-html punycode
+        run: npm install -g newman newman-reporter-html
         # Install Newman and the HTML reporter globally.
 
       - name: Run Postman Collection and generate HTML report
-        id: run_postman
         run: |
           mkdir -p rdw-test-results
           TIMESTAMP=$(date +"%Y%m%d%H%M%S")
-          REPORT_PATH="rdw-test-results/${TIMESTAMP}_report.html"  # Dynamically generate the path for the HTML report using a timestamp.
-          newman run tests/rdw-test-collection.postman_collection.json -r html --reporter-html-export "${REPORT_PATH}"
-          echo "::set-output name=report_path::${REPORT_PATH}"  # Save the path to the HTML report as an output variable.
+          REPORT_PATH="rdw-test-results/${TIMESTAMP}_report.html"
+          npm exec punycode newman run tests/rdw-test-collection.postman_collection.json -r html --reporter-html-export "${REPORT_PATH}"
+          echo "::set-output name=report_path::${REPORT_PATH}"
         # Run the Postman collection with Newman and generate an HTML report. Save the report path to an output variable.
 
       - name: Fetch all branches
