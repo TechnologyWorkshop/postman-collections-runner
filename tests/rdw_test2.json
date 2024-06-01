@@ -1,0 +1,57 @@
+{
+  "info": {
+    "name": "RDW API Tests",
+    "_postman_id": "your-unique-id",
+    "description": "Test de RDW API voor voertuiggegevens",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Controleer merk voertuig",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://opendata.rdw.nl/resource/m9d7-ebf2.json?Kenteken=P300BB",
+          "protocol": "https",
+          "host": ["opendata", "rdw", "nl"],
+          "path": ["resource", "m9d7-ebf2.json"],
+          "query": [
+            {
+              "key": "Kenteken",
+              "value": "P300BB"
+            }
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// Controleer of de statuscode 200 is",
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "// Parse de JSON-respons",
+              "var jsonData = pm.response.json();",
+              "",
+              "// Controleer of de respons minstens één item bevat",
+              "pm.test(\"Response bevat minstens één item\", function () {",
+              "    pm.expect(jsonData).to.be.an('array').that.is.not.empty;",
+              "});",
+              "",
+              "// Controleer of het merk van het eerste voertuig 'PEUGEOT' is",
+              "pm.test(\"Merk van het eerste voertuig is PEUGEOT\", function () {",
+              "    pm.expect(jsonData[0][\"merk\"]).to.equal(\"PEUGEOT\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
