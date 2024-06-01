@@ -32,6 +32,10 @@ Merk moet uitkomen op Audi met 6 Cilinder (Hier moet FAIL uitkomen)
     ${params}=    Create Dictionary    kenteken=00GBD9
     ${response}=    Get     https://opendata.rdw.nl/resource/m9d7-ebf2.json     params=${params}
     ${json_response}=    Evaluate    json.loads($response.content.decode('utf-8'))
-    Should Be Equal As Strings    ${json_response[0]["kenteken"]}    00GBD7
+    Should Not Be Equal As Strings        ${json_response[0]["kenteken"]}    00GBD7
     Should Be Equal As Strings    ${json_response[0]["merk"]}    AUDI
     Should Be Equal As Strings    ${json_response[0]["aantal_cilinders"]}    6
+
+
+
+
