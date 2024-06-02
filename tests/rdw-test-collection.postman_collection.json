@@ -15,7 +15,7 @@
 						"exec": [
 							"// Controleer of de status code 200 is\r",
 							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
 							"// Controleer of het veld \"merk\" in alle objecten \"BMW\" is\r",
